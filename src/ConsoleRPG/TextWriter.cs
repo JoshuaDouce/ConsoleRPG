@@ -26,4 +26,12 @@ public class TextWriter : ITextWriter
     {
         Write($"{text}{Environment.NewLine}", consoleColor);
     }
+
+    public void WriteOptions(IEnumerable<string> options)
+    {
+        foreach (string option in options) 
+        {
+            WriteLine(option);
+        }
+    }
 }

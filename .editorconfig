@@ -36,11 +36,11 @@ csharp_style_expression_bodied_constructors = false:suggestion
 #Style - implicit and explicit types
 
 #prefer explicit type over var in all cases, unless overridden by another code style rule
-csharp_style_var_elsewhere = false:suggestion
+csharp_style_var_elsewhere =true:suggestion
 #prefer explicit type over var to declare variables with built-in system types such as int
-csharp_style_var_for_built_in_types = false:suggestion
+csharp_style_var_for_built_in_types =false:silent
 #prefer explicit type over var when the type is already mentioned on the right-hand side of a declaration
-csharp_style_var_when_type_is_apparent = false:suggestion
+csharp_style_var_when_type_is_apparent =true:suggestion
 
 #Style - language keyword and framework type options
 
@@ -62,3 +62,4 @@ csharp_preferred_modifier_order = public,private,readonly:suggestion
 #prefer fields not to be prefaced with this. or Me. in Visual Basic
 dotnet_style_qualification_for_field = false:suggestion
 csharp_style_namespace_declarations=file_scoped:silent
+csharp_style_prefer_pattern_matching=true:suggestion
