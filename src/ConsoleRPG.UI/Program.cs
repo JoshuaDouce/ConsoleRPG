@@ -9,7 +9,7 @@ IConfiguration config = new ConfigurationBuilder()
     .AddEnvironmentVariables()
     .Build();
 
-using IHost host = Host.CreateDefaultBuilder(args)
+using var host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services =>
     {
         services.AddScoped<ITextWriter, ConsoleRPG.TextWriter>();
@@ -22,5 +22,5 @@ await host.StartAsync();
 
 Console.WriteLine(AsciArt.Title);
 
-Game? game = new(textWriter: host.Services.GetService<ITextWriter>());
+GameSession? game = new(textWriter: host.Services.GetService<ITextWriter>());
 game.Start();

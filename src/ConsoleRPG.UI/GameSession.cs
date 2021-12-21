@@ -4,23 +4,24 @@ using ConsoleRPG.Core.Models;
 
 namespace ConsoleRPG;
 
-public class Game
+public class GameSession
 {
     private readonly ITextWriter _textWriter;
 
     private Location _currentLocation;
 
-    public Game(ITextWriter textWriter)
+    private Player _currentPlayer;
+
+    public GameSession(ITextWriter textWriter)
     {
         _textWriter = textWriter;
         _currentLocation = WorldFactory.CreateWorld();
+        _currentPlayer = new Player();
     }
 
     public void Start()
     {
         _textWriter.WriteLine($"Welcome to #location#. What do they call you?");
-
-        Player? player = new();
         string? name = Console.ReadLine();
 
         while (string.IsNullOrWhiteSpace(name))
@@ -29,7 +30,7 @@ public class Game
             name = Console.ReadLine();
         }
 
-        player.Name = name;
+        _currentPlayer.Name = name;
         _textWriter.WriteLine($"Welcome {name}!");
 
         TravelTo();
@@ -47,7 +48,7 @@ public class Game
 
         while (!availableLocations.Contains(nextLocation))
         {
-            _textWriter.WriteLine("Choose an a valid location", ConsoleColor.Red);
+            _textWriter.WriteLine("Choose a valid location", ConsoleColor.Red);
             _textWriter.WriteOptions(availableLocations);
             nextLocation = Console.ReadLine();
         }

@@ -1,0 +1,8 @@
+Console RPG Flow
+
+Start -> 
+New Game/Load Game -> 
+Create Character -> 
+Use command line to navigate through the game i.e 
+	map(list next locations), 
+	travel {location}
