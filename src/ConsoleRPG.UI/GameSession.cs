@@ -6,55 +6,31 @@ namespace ConsoleRPG;
 
 public class GameSession
 {
-    private readonly ITextWriter _textWriter;
+    public Location CurrentLocation;
 
-    private Location _currentLocation;
+    public Player CurrentPlayer;
 
-    private Player _currentPlayer;
-
-    public GameSession(ITextWriter textWriter)
+    public GameSession()
     {
-        _textWriter = textWriter;
-        _currentLocation = WorldFactory.CreateWorld();
-        _currentPlayer = new Player();
+        CurrentLocation = WorldFactory.CreateWorld();
+        CurrentPlayer = new Player
+        {
+            Name = "Brutus"
+        };
     }
 
-    public void Start()
+    public void TravelTo(string location)
     {
-        _textWriter.WriteLine($"Welcome to #location#. What do they call you?");
-        string? name = Console.ReadLine();
+        var availableLocations = CurrentLocation.ConnectedLocations.Select(x => x.Name.ToLower());
+        var attemptedLocation = CurrentLocation.ConnectedLocations
+            .FirstOrDefault(x => x.Name.ToLower() == location);
 
-        while (string.IsNullOrWhiteSpace(name))
-        {
-            _textWriter.WriteLine("Please enter a value.", ConsoleColor.Red);
-            name = Console.ReadLine();
-        }
+        if (location == CurrentLocation.Name.ToLower())
+            return;
 
-        _currentPlayer.Name = name;
-        _textWriter.WriteLine($"Welcome {name}!");
+        if (attemptedLocation == null)
+            throw new ArgumentException($"Invalid location {location}");
 
-        TravelTo();
-
-        Console.ReadLine();
-    }
-
-    private void TravelTo()
-    {
-        _textWriter.WriteLine($"You have arrived at {_currentLocation.Name}");
-        _textWriter.WriteLine($"Where would you like to travel?");
-        var availableLocations = _currentLocation.ConnectedLocations.Select(x => x.Name.ToLower());
-        _textWriter.WriteOptions(availableLocations);
-        var nextLocation = Console.ReadLine()?.ToLower();
-
-        while (!availableLocations.Contains(nextLocation))
-        {
-            _textWriter.WriteLine("Choose a valid location", ConsoleColor.Red);
-            _textWriter.WriteOptions(availableLocations);
-            nextLocation = Console.ReadLine();
-        }
-
-        _currentLocation = _currentLocation.ConnectedLocations
-            .FirstOrDefault(x => x.Name.ToLower() == nextLocation)!;
-        TravelTo();
+        CurrentLocation = attemptedLocation;
     }
 }
