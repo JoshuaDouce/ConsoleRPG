@@ -10,7 +10,6 @@ internal class InGameCommand : Command
     public InGameCommand(ITextWriter textWriter, IServiceProvider serviceProvider, MoveCommand moveCommand) 
         : base(CommandNames.InGame, "In game commands")
     {
-        AddOption(CommonOptions.QuitOption);
         AddOption(InGameOptions.LocationList);
         AddCommand(moveCommand);
 

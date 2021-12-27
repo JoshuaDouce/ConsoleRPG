@@ -11,7 +11,6 @@ internal class CreateCharacterCommand : Command
         base(CommandNames.CreateChracaterCommand, "Creates your character")
     {
         AddOption(CharacterOptions.CharacterName);
-        AddOption(CommonOptions.QuitOption);
 
         this.SetHandler((string name, bool quit) => {
             if (quit)

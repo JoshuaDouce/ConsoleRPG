@@ -39,7 +39,7 @@ public class Program
         if (!string.IsNullOrWhiteSpace(command))
         {
             // Parse the incoming args and invoke the handler
-            return rootCommand.InvokeAsync(args).Result;
+            return rootCommand.InvokeAsync(command).Result;
         }
 
         return rootCommand.InvokeAsync("-h").Result;
@@ -53,8 +53,7 @@ public class Program
 
         var rootCommand = new RootCommand("A command line driven RPG experience")
         {
-            RootOptions.StartOption,
-            CommonOptions.QuitOption
+            RootOptions.StartOption
         };
 
         var inGameCommand = host.Services.GetService<InGameCommand>();
@@ -62,6 +61,7 @@ public class Program
 
         rootCommand.AddCommand(inGameCommand!);
         rootCommand.AddCommand(createCharacterCommand!);
+        rootCommand.AddGlobalOption(CommonOptions.QuitOption);
         rootCommand.SetHandler((bool startGame, bool endGame) =>
         {
             if (endGame)
