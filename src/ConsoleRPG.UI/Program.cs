@@ -35,14 +35,7 @@ public class Program
         var rootCommand = SetupCommandLine(host);
 
         rootCommand.Invoke("-h");
-        var command = Console.ReadLine();
-        if (!string.IsNullOrWhiteSpace(command))
-        {
-            // Parse the incoming args and invoke the handler
-            return rootCommand.InvokeAsync(command).Result;
-        }
-
-        return rootCommand.InvokeAsync("-h").Result;
+        return rootCommand.InvokeAsync(args).Result;
     }
 
     private static RootCommand SetupCommandLine(IHost host)
@@ -51,7 +44,9 @@ public class Program
         var game = host.Services.GetService<GameSession>();
         var textWriter = host.Services.GetService<ITextWriter>();
 
-        var rootCommand = new RootCommand("A command line driven RPG experience")
+        var rootCommand = new RootCommand("A command line driven RPG experience. Once the game has started commands " +
+            "are executed in the context of the current command so you do not need to prefix with command i.e goto <location> ." +
+            "And not ingame goto <location>.")
         {
             RootOptions.StartOption
         };
