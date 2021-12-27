@@ -1,4 +1,5 @@
 ﻿using System.CommandLine;
+using ConsoleRPG.Core;
 using ConsoleRPG.UI.CommandOptions;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,7 +10,7 @@ internal class MoveCommand : Command
     public MoveCommand(ITextWriter textWriter, IServiceProvider serviceProvider) 
         : base(CommandNames.MoveCommand, "This command send you to the specified location")
     {
-        AddOption(MoveOptions.LocationOption);
+        AddOption(LocationOptions.LocationOption);
 
         this.SetHandler((string location) =>
         {
@@ -25,6 +26,6 @@ internal class MoveCommand : Command
                 textWriter?.WriteLine($"{gameSession?.CurrentLocation.Name} " +
                     $"has no connected location called {location}.");
             }
-        }, MoveOptions.LocationOption);
+        }, LocationOptions.LocationOption);
     }
 }

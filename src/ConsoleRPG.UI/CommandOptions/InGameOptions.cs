@@ -4,7 +4,7 @@ namespace ConsoleRPG.UI.CommandOptions;
 
 internal class InGameOptions
 {
-    public static Option<bool> LocationList { get; } = new Option<bool>(
+    internal static Option<bool> LocationList { get; } = new Option<bool>(
         OptionNames.LocationList,
         description: "List all connected locations and your current location.",
         getDefaultValue: () => false);

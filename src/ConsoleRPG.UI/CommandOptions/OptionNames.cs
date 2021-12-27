@@ -1,12 +1,16 @@
 ﻿namespace ConsoleRPG.UI.CommandOptions;
 
-public class OptionNames
+internal class OptionNames
 {
-    public const string Start = "start";
+    internal const string Start = "start";
 
-    public const string Quit = "quit";
+    internal const string Quit = "quit";
 
-    public const string Action = "action";
+    internal const string Action = "action";
 
-    public const string LocationList = "location-list";
+    internal const string Location = "location";
+
+    internal const string LocationList = "location-list";
+
+    internal const string CharacterName = "name";
 }

@@ -1,4 +1,5 @@
 ﻿using System.CommandLine;
+using ConsoleRPG.Core;
 using ConsoleRPG.UI.CommandOptions;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -6,7 +7,6 @@ namespace ConsoleRPG.UI.Commands;
 
 internal class InGameCommand : Command
 {
-
     public InGameCommand(ITextWriter textWriter, IServiceProvider serviceProvider, MoveCommand moveCommand) 
         : base(CommandNames.InGame, "In game commands")
     {

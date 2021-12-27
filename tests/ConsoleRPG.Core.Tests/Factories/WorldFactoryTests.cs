@@ -5,7 +5,7 @@ using ConsoleRPG.Core.Models;
 using FluentAssertions;
 using Xunit;
 
-namespace ConsoleRPG.Core.Tests;
+namespace ConsoleRPG.Core.Tests.Factories;
 
 public class WorldFactoryTests
 {

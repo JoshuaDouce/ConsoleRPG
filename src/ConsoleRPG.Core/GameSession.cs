@@ -1,8 +1,7 @@
-﻿using ConsoleRPG.Core;
-using ConsoleRPG.Core.Factories;
+﻿using ConsoleRPG.Core.Factories;
 using ConsoleRPG.Core.Models;
 
-namespace ConsoleRPG;
+namespace ConsoleRPG.Core;
 
 public class GameSession
 {
@@ -13,19 +12,16 @@ public class GameSession
     public GameSession()
     {
         CurrentLocation = WorldFactory.CreateWorld();
-        CurrentPlayer = new Player
-        {
-            Name = "Brutus"
-        };
+        CurrentPlayer = new Player();
     }
 
     public void TravelTo(string location)
     {
         var availableLocations = CurrentLocation.ConnectedLocations.Select(x => x.Name.ToLower());
         var attemptedLocation = CurrentLocation.ConnectedLocations
-            .FirstOrDefault(x => x.Name.ToLower() == location);
+            .FirstOrDefault(x => string.Equals(location, x.Name, StringComparison.InvariantCultureIgnoreCase));
 
-        if (location == CurrentLocation.Name.ToLower())
+        if (string.Equals(location, CurrentLocation.Name, StringComparison.InvariantCultureIgnoreCase))
             return;
 
         if (attemptedLocation == null)
