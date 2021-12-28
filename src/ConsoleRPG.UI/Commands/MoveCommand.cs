@@ -10,9 +10,9 @@ internal class MoveCommand : Command
     public MoveCommand(ITextWriter textWriter, IServiceProvider serviceProvider) 
         : base(CommandNames.MoveCommand, "This command send you to the specified location")
     {
-        var argument = new Argument<string>("location");
+        var locationArgument = new Argument<string>("location");
 
-        AddArgument(argument);
+        AddArgument(locationArgument);
 
         this.SetHandler((string location) =>
         {
@@ -28,6 +28,6 @@ internal class MoveCommand : Command
                 textWriter?.WriteLine($"{gameSession?.CurrentLocation.Name} " +
                     $"has no connected location called {location}.");
             }
-        }, argument);
+        }, locationArgument);
     }
 }

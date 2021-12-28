@@ -5,6 +5,7 @@ using ConsoleRPG;
 using ConsoleRPG.Core;
 using ConsoleRPG.UI.CommandOptions;
 using ConsoleRPG.UI.Commands;
+using ConsoleRPG.UI.Commands.Inventory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -21,11 +22,15 @@ public class Program
         using var host = Host.CreateDefaultBuilder(args)
             .ConfigureServices(services =>
             {
-                services.AddScoped<ITextWriter, TextWriter>();
+                services.AddSingleton<ITextWriter, TextWriter>();
                 services.AddSingleton<GameSession>();
                 services.AddSingleton<MoveCommand>();
                 services.AddSingleton<InGameCommand>();
                 services.AddSingleton<CreateCharacterCommand>();
+                services.AddSingleton<InventoryCommand>();
+                services.AddSingleton<EquipCommand>();
+                services.AddSingleton<UnequipCommand>();
+                services.AddSingleton<DestroyCommand>();
                 services.AddOptions<GameSettings>()
                     .Bind(config.GetSection("GameSettings"));
             })
@@ -43,6 +48,8 @@ public class Program
         var gameStarted = false;
         var game = host.Services.GetService<GameSession>();
         var textWriter = host.Services.GetService<ITextWriter>();
+        var inGameCommand = host.Services.GetService<InGameCommand>();
+        var createCharacterCommand = host.Services.GetService<CreateCharacterCommand>();
 
         var rootCommand = new RootCommand("A command line driven RPG experience. Once the game has started commands " +
             "are executed in the context of the current command so you do not need to prefix with command i.e goto <location> ." +
@@ -50,9 +57,6 @@ public class Program
         {
             RootOptions.StartOption
         };
-
-        var inGameCommand = host.Services.GetService<InGameCommand>();
-        var createCharacterCommand = host.Services.GetService<CreateCharacterCommand>();
 
         rootCommand.AddCommand(inGameCommand!);
         rootCommand.AddCommand(createCharacterCommand!);
@@ -67,22 +71,9 @@ public class Program
             if (startGame)
             {
                 Console.WriteLine(AsciArt.Title);
-                game = new();
                 gameStarted = true;
 
-                while (string.IsNullOrWhiteSpace(game!.CurrentPlayer.Name))
-                {
-                    textWriter!.WriteLine("Create your character.");
-                    createCharacterCommand!.InvokeAsync("-h");
-                    var command = Console.ReadLine();
-                    if (string.IsNullOrWhiteSpace(command))
-                    {
-                        createCharacterCommand!.InvokeAsync("-h");
-                        continue;
-                    }
-                    createCharacterCommand?.Invoke(command);
-                    game = host.Services.GetService<GameSession>();
-                }
+                CreateCharacter(game!, textWriter, createCharacterCommand);
 
                 textWriter?.WriteLine($"Welcome to Sick Place {game.CurrentPlayer.Name}.");
                 inGameCommand?.InvokeAsync("-h");
@@ -92,18 +83,38 @@ public class Program
             {
                 while (gameStarted)
                 {
-                    var command = Console.ReadLine();
-                    if (string.IsNullOrWhiteSpace(command))
-                    {
-                        inGameCommand!.InvokeAsync("-h");
-                        continue;
-                    }
-
-                    inGameCommand!.InvokeAsync(command);
+                    PlayGame(inGameCommand!);
                 }
             }
         }, RootOptions.StartOption, CommonOptions.QuitOption);
 
         return rootCommand;
+    }
+
+    private static void CreateCharacter(GameSession game, ITextWriter? textWriter, CreateCharacterCommand? createCharacterCommand)
+    {
+        while (string.IsNullOrWhiteSpace(game!.CurrentPlayer.Name))
+        {
+            textWriter!.WriteLine("Create your character.");
+            createCharacterCommand!.InvokeAsync("-h");
+            var command = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(command))
+            {
+                createCharacterCommand!.InvokeAsync("-h");
+                continue;
+            }
+            createCharacterCommand?.Invoke(command);
+        }
+    }
+
+    private static void PlayGame(InGameCommand inGameCommand)
+    {
+        string? command = Console.ReadLine();
+        if (string.IsNullOrWhiteSpace(command))
+        {
+            inGameCommand!.InvokeAsync("-h");
+        }
+
+        inGameCommand!.InvokeAsync(command!);
     }
 }

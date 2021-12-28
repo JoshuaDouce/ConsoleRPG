@@ -1,5 +1,7 @@
 ﻿using ConsoleRPG.Core.Factories;
 using ConsoleRPG.Core.Models;
+using ConsoleRPG.Core.Models.Consumables;
+using ConsoleRPG.Core.Models.Weapons;
 
 namespace ConsoleRPG.Core;
 
@@ -12,7 +14,14 @@ public class GameSession
     public GameSession()
     {
         CurrentLocation = WorldFactory.CreateWorld();
-        CurrentPlayer = new Player();
+        CurrentPlayer = new Player
+        {
+            Weapon = new Sword("Sword"),
+            Inventory = new List<Item> {
+                new Bow("Long Bow"),
+                new Potion("Health Potion")
+            }
+        };
     }
 
     public void TravelTo(string location)

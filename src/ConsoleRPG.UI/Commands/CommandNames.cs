@@ -7,4 +7,12 @@ internal class CommandNames
     public const string MoveCommand = "goto";
 
     public const string CreateChracaterCommand = "create-character";
+
+    public const string Inventory = "inventory";
+
+    internal const string Equip = "equip";
+
+    internal const string Unequip = "unequip";
+
+    internal const string Destroy = "destroy";
 }

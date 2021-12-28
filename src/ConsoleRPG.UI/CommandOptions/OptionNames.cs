@@ -10,5 +10,9 @@ internal class OptionNames
 
     internal const string LocationList = "--location-list";
 
+    internal const string EquippedList = "--equipped-list";
+
+    internal const string List = "--list";
+
     internal const string CharacterName = "--name";
 }
