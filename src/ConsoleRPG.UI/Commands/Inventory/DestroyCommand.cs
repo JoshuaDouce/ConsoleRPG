@@ -1,5 +1,6 @@
 ﻿using System.CommandLine;
 using ConsoleRPG.Core;
+using ConsoleRPG.Interfaces;
 using ConsoleRPG.UI.CommandArguments;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,6 +16,8 @@ internal class DestroyCommand : Command
         var gameSession = serviceProvider.GetService<GameSession>();
 
         this.SetHandler((string item) => {
+            //TODO: The majority of thi slogic should be handled outside of the handler - Inventory Manager?
+            //TODO: these three commands are very similiar can be refactored
             var inventory = gameSession!.CurrentPlayer.Inventory;
             var itemToDestroy = inventory.FirstOrDefault(
                 x => string.Equals(x.Name, item, StringComparison.InvariantCultureIgnoreCase));

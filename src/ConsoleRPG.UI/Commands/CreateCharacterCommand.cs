@@ -1,5 +1,6 @@
 ﻿using System.CommandLine;
 using ConsoleRPG.Core;
+using ConsoleRPG.Interfaces;
 using ConsoleRPG.UI.CommandOptions;
 using Microsoft.Extensions.DependencyInjection;
 

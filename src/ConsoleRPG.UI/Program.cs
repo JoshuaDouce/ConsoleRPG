@@ -3,6 +3,8 @@
 using System.CommandLine;
 using ConsoleRPG;
 using ConsoleRPG.Core;
+using ConsoleRPG.Interfaces;
+using ConsoleRPG.Services;
 using ConsoleRPG.UI.CommandOptions;
 using ConsoleRPG.UI.Commands;
 using ConsoleRPG.UI.Commands.Inventory;

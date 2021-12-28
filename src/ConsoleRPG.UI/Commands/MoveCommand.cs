@@ -1,6 +1,6 @@
 ﻿using System.CommandLine;
 using ConsoleRPG.Core;
-using ConsoleRPG.UI.CommandOptions;
+using ConsoleRPG.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ConsoleRPG.UI.Commands;
@@ -21,7 +21,7 @@ internal class MoveCommand : Command
             try
             {
                 gameSession?.TravelTo(location);
-                textWriter?.WriteLine($"You have arrived at {gameSession?.CurrentLocation.Name}");
+                textWriter?.WriteLine($"You have arrived at {location}");
             }
             catch (ArgumentException)
             {

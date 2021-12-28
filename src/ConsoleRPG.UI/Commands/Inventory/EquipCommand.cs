@@ -1,6 +1,7 @@
 ﻿using System.CommandLine;
 using ConsoleRPG.Core;
 using ConsoleRPG.Core.Models.Weapons;
+using ConsoleRPG.Interfaces;
 using ConsoleRPG.UI.CommandArguments;
 using Microsoft.Extensions.DependencyInjection;
 

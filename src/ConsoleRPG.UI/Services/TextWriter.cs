@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.Options;
+﻿using ConsoleRPG.Interfaces;
+using Microsoft.Extensions.Options;
 
-namespace ConsoleRPG;
+namespace ConsoleRPG.Services;
 
 public class TextWriter : ITextWriter
 {
