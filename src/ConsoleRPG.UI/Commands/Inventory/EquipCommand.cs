@@ -1,6 +1,5 @@
 ﻿using System.CommandLine;
 using ConsoleRPG.Core;
-using ConsoleRPG.Core.Models.Weapons;
 using ConsoleRPG.Interfaces;
 using ConsoleRPG.UI.CommandArguments;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,20 +16,17 @@ internal class EquipCommand : Command
         var gameSession = serviceProvider.GetService<GameSession>();
 
         this.SetHandler((string item) => {
-            var inventory = gameSession!.CurrentPlayer.Inventory;
-            var itemToEquip = inventory.FirstOrDefault(
-                x => string.Equals(x.Name, item, StringComparison.InvariantCultureIgnoreCase));
+            var player = gameSession!.CurrentPlayer;
 
-            if (itemToEquip != null)
+            try
             {
-                inventory.Add(gameSession!.CurrentPlayer!.Weapon!);
-                inventory.Remove(itemToEquip);
-                gameSession.CurrentPlayer.Weapon = (Weapon)itemToEquip;
-                textWriter.WriteLine($"Equipped {item}");
-                return;
+                player.Equip(item);
+                textWriter.WriteLine($"Equipped {item}.");
             }
-
-            textWriter.WriteLine($"No item to equip with name {item}");
+            catch (Exception e)
+            {
+                textWriter.WriteLine(e.Message);
+            }
         }, CommonArguments.Item);
     }
 }

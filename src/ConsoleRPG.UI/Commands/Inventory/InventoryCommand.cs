@@ -9,7 +9,7 @@ namespace ConsoleRPG.UI.Commands.Inventory;
 internal class InventoryCommand : Command
 {
     public InventoryCommand(IServiceProvider serviceProvider, ITextWriter textWriter, 
-        DestroyCommand destroyCommand, EquipCommand equipCommand, UnequipCommand unequipCommand) 
+        DestroyCommand destroyCommand, EquipCommand equipCommand) 
         : base(CommandNames.Inventory, 
         "Commands for managing inventory and equipped items")
     {
@@ -17,7 +17,6 @@ internal class InventoryCommand : Command
         AddOption(InventoryOptions.EquippedList);
         AddCommand(destroyCommand);
         AddCommand(equipCommand);
-        AddCommand(unequipCommand);
 
         this.SetHandler((bool inventoryList, bool equippedList) => {
             var gameSession = serviceProvider.GetService<GameSession>();
@@ -25,12 +24,12 @@ internal class InventoryCommand : Command
             if (inventoryList)
             {
                 textWriter.WriteLine("Items currently in your inventory:");
-                textWriter.WriteOptions(gameSession!.CurrentPlayer.Inventory.Select(x => x.Name));
+                textWriter.WriteOptions(gameSession!.CurrentPlayer.Inventory.Items.Select(x => x.Name));
             }
 
             if (equippedList)
             {
-                var weapon = gameSession!.CurrentPlayer!.Weapon;
+                var weapon = gameSession!.CurrentPlayer!.EquippedWeapon;
                 if (weapon is null)
                 {
                     textWriter.WriteLine("You have nothing equipped");

@@ -16,11 +16,11 @@ public class GameSession
         CurrentLocation = WorldFactory.CreateWorld();
         CurrentPlayer = new Player
         {
-            Weapon = new Sword("Sword"),
-            Inventory = new List<Item> {
-                new Bow("Long Bow"),
-                new Potion("Health Potion")
-            }
+            EquippedWeapon = new Sword("Sword")
+        };
+        CurrentPlayer.Inventory.Items = new List<Item> {
+            new Bow("Long Bow"),
+            new Potion("Health Potion")
         };
     }
 

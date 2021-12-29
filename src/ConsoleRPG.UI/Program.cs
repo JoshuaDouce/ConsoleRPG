@@ -31,7 +31,6 @@ public class Program
                 services.AddSingleton<CreateCharacterCommand>();
                 services.AddSingleton<InventoryCommand>();
                 services.AddSingleton<EquipCommand>();
-                services.AddSingleton<UnequipCommand>();
                 services.AddSingleton<DestroyCommand>();
                 services.AddOptions<GameSettings>()
                     .Bind(config.GetSection("GameSettings"));

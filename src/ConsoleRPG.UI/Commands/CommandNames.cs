@@ -12,7 +12,5 @@ internal class CommandNames
 
     internal const string Equip = "equip";
 
-    internal const string Unequip = "unequip";
-
     internal const string Destroy = "destroy";
 }
