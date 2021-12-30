@@ -1,18 +1,16 @@
 ﻿namespace ConsoleRPG.UI.CommandOptions;
 
-internal class OptionNames
+internal static class OptionNames
 {
-    internal const string Start = "--start";
+    internal static string[] Start = { "--start", "-s" };
 
-    internal const string Quit = "--quit";
+    internal static string[] Quit = { "--quit", "-q" };
 
-    internal const string Action = "--action";
+    internal static string[] LocationList = { "--location-list", "-ll"};
 
-    internal const string LocationList = "--location-list";
+    internal static string[] EquippedList = { "--equipped-list", "-el" };
 
-    internal const string EquippedList = "--equipped-list";
+    internal static string[] List = { "--list", "-l" };
 
-    internal const string List = "--list";
-
-    internal const string CharacterName = "--name";
+    internal static string[] CharacterNameAliases = { "--name", "-n" };
 }

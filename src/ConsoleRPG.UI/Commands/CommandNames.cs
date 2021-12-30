@@ -2,15 +2,15 @@
 
 internal class CommandNames
 {
-    public const string InGame = "ingame";
+    public const string InGame = "in-game";
 
     public const string MoveCommand = "goto";
 
     public const string CreateChracaterCommand = "create-character";
 
-    public const string Inventory = "inventory";
+    public const string Inventory = "inv";
 
-    internal const string Equip = "equip";
+    internal const string Equip = "eqp";
 
-    internal const string Destroy = "destroy";
+    internal const string Destroy = "des";
 }

@@ -8,6 +8,7 @@ namespace ConsoleRPG.UI.Commands.Inventory;
 
 internal class EquipCommand : Command
 {
+    //TODO: this doesnt make sense to be a inventory sub command it should be a new Character command.
     public EquipCommand(ITextWriter textWriter, IServiceProvider serviceProvider) 
         : base(CommandNames.Equip, "Equip an item")
     {

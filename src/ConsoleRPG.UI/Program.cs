@@ -40,7 +40,6 @@ public class Program
         await host.StartAsync();
         var rootCommand = SetupCommandLine(host);
 
-        rootCommand.Invoke("-h");
         return rootCommand.InvokeAsync(args).Result;
     }
 
