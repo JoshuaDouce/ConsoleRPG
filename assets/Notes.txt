@@ -6,3 +6,18 @@ Create Character ->
 Use command line to navigate through the game i.e 
 	map(list next locations), 
 	travel {location}
+
+Commands -> Root Command - Starts the game
+If New Game -> Create new character (Character Creation Command)
+When anywhere in the game you can travel to connected locations, manage your inventory and use certain items(i.e health potion)
+Game will start in town (here you can get Quests, Go to the shop buy/sell(weapons & items))
+When you travel to a location you can encounter a monster which will put you in combat in combat you can attack, run, or use an item
+combat wil be turn based
+---
+
+Commands
+---
+root --start ("start the game") - default true
+root --quit ("exit the game") - default false
+character --name <name> ("set character name")
+character --class <class> ("set character class")

@@ -1,4 +1,5 @@
-﻿using ConsoleRPG.Core.Factories;
+﻿using ConsoleRPG.Core.Exceptions;
+using ConsoleRPG.Core.Factories;
 using ConsoleRPG.Core.Models;
 using ConsoleRPG.Core.Models.Consumables;
 using ConsoleRPG.Core.Models.Weapons;
@@ -10,6 +11,8 @@ public class GameSession
     public Location CurrentLocation;
 
     public Player CurrentPlayer;
+
+    public bool InCombat = false;
 
     public GameSession()
     {
@@ -26,6 +29,11 @@ public class GameSession
 
     public void TravelTo(string location)
     {
+        if (InCombat)
+        {
+            throw new Exception("Cannot travel when you are in combat!");
+        }
+
         var availableLocations = CurrentLocation.ConnectedLocations.Select(x => x.Name.ToLower());
         var attemptedLocation = CurrentLocation.ConnectedLocations
             .FirstOrDefault(x => string.Equals(location, x.Name, StringComparison.InvariantCultureIgnoreCase));
@@ -37,5 +45,10 @@ public class GameSession
             throw new ArgumentException($"Invalid location {location}");
 
         CurrentLocation = attemptedLocation;
+
+        if (CurrentLocation.Monster is not null)
+        {
+            InCombat = true;
+        }
     }
 }

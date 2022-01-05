@@ -6,9 +6,16 @@ public class Location
 
     public List<Location> ConnectedLocations { get; set; }
 
+    public Monster? Monster { get; set; }
+
     public Location(string name)
     {
         Name = name;
         ConnectedLocations = new List<Location>();
+    }
+
+    public void AddMonster(Monster monster)
+    {
+        Monster = monster;
     }
 }

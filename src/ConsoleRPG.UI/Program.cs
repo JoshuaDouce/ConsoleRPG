@@ -7,6 +7,7 @@ using ConsoleRPG.Interfaces;
 using ConsoleRPG.Services;
 using ConsoleRPG.UI.CommandOptions;
 using ConsoleRPG.UI.Commands;
+using ConsoleRPG.UI.Commands.Combat;
 using ConsoleRPG.UI.Commands.Inventory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +28,7 @@ public class Program
                 services.AddSingleton<ITextWriter, TextWriter>();
                 services.AddSingleton<GameSession>();
                 services.AddSingleton<MoveCommand>();
+                services.AddSingleton<CombatCommand>();
                 services.AddSingleton<InGameCommand>();
                 services.AddSingleton<CreateCharacterCommand>();
                 services.AddSingleton<InventoryCommand>();

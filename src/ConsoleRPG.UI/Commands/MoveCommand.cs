@@ -1,6 +1,7 @@
 ﻿using System.CommandLine;
 using ConsoleRPG.Core;
 using ConsoleRPG.Interfaces;
+using ConsoleRPG.UI.Commands.Combat;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ConsoleRPG.UI.Commands;
@@ -28,6 +29,14 @@ internal class MoveCommand : Command
                 textWriter?.WriteLine($"{gameSession?.CurrentLocation.Name} " +
                     $"has no connected location called {location}.");
             }
+
+            var monster = gameSession!.CurrentLocation.Monster;
+            if (monster is not null)
+            {
+                textWriter?.WriteLine($"You have encountered a {monster.Name}");
+                textWriter?.WriteLine($"You are in combat!");
+            }
+
         }, locationArgument);
     }
 }

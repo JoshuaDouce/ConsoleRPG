@@ -2,6 +2,7 @@
 using ConsoleRPG.Core;
 using ConsoleRPG.Interfaces;
 using ConsoleRPG.UI.CommandOptions;
+using ConsoleRPG.UI.Commands.Combat;
 using ConsoleRPG.UI.Commands.Inventory;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,12 +11,13 @@ namespace ConsoleRPG.UI.Commands;
 internal class InGameCommand : Command
 {
     public InGameCommand(ITextWriter textWriter, IServiceProvider serviceProvider, MoveCommand moveCommand,
-        InventoryCommand inventoryCommand) 
+        InventoryCommand inventoryCommand, CombatCommand combatCommand) 
         : base(CommandNames.InGame, "In game commands")
     {
         AddOption(InGameOptions.LocationList);
         AddCommand(moveCommand);
         AddCommand(inventoryCommand);
+        AddCommand(combatCommand);
 
         var gameSession = serviceProvider.GetService<GameSession>();
 

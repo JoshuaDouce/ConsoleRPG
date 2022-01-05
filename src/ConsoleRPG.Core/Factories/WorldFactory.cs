@@ -14,6 +14,9 @@ public static class WorldFactory
         var forest = new Location("Forest");
         var swamp = new Location("Swamp");
         var dungeon = new Location("Dungeon");
+        forest.AddMonster(new Monster("Spider"));
+        swamp.AddMonster(new Monster("Bog Dweller"));
+        dungeon.AddMonster(new Monster("Skeleton"));
 
         AddLocations(town, new List<Location> { forest, swamp });
         AddLocations(forest, new List<Location> { dungeon });

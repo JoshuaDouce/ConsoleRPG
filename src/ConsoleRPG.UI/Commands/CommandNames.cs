@@ -13,4 +13,6 @@ internal class CommandNames
     internal const string Equip = "eqp";
 
     internal const string Destroy = "des";
+
+    internal const string Combat = "combat";
 }

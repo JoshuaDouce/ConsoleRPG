@@ -34,4 +34,9 @@ public class Player
         Inventory.Items.Remove(weaponToEquip);
         EquippedWeapon = (Weapon)weaponToEquip;
     }
+
+    public void UseWeapon()
+    {
+        EquippedWeapon?.UseWeapon();
+    }
 }
