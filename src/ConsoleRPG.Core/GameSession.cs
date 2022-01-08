@@ -1,5 +1,4 @@
-﻿using ConsoleRPG.Core.Exceptions;
-using ConsoleRPG.Core.Factories;
+﻿using ConsoleRPG.Core.Factories;
 using ConsoleRPG.Core.Models;
 using ConsoleRPG.Core.Models.Consumables;
 using ConsoleRPG.Core.Models.Weapons;
@@ -17,9 +16,10 @@ public class GameSession
     public GameSession()
     {
         CurrentLocation = WorldFactory.CreateWorld();
-        CurrentPlayer = new Player
+        CurrentPlayer = new Player("")
         {
-            EquippedWeapon = new Sword("Sword")
+            EquippedWeapon = new Sword("Sword"),
+            Health = 10
         };
         CurrentPlayer.Inventory.Items = new List<Item> {
             new Bow("Long Bow"),

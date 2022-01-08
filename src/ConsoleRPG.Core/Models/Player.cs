@@ -3,9 +3,11 @@ using ConsoleRPG.Core.Models.Weapons;
 
 namespace ConsoleRPG.Core;
 
-public class Player
+public class Player : Character
 {
-    public string Name { get; set; } = null!;
+    public Player(string name) : base(name)
+    {
+    }
 
     public InventoryList Inventory { get; set; } = new InventoryList();
 

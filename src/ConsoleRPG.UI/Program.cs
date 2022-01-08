@@ -29,6 +29,8 @@ public class Program
                 services.AddSingleton<GameSession>();
                 services.AddSingleton<MoveCommand>();
                 services.AddSingleton<CombatCommand>();
+                services.AddSingleton<RunCommand>();
+                services.AddSingleton<AttackCommand>();
                 services.AddSingleton<InGameCommand>();
                 services.AddSingleton<CreateCharacterCommand>();
                 services.AddSingleton<InventoryCommand>();

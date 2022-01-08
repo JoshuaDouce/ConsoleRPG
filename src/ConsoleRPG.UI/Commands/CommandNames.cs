@@ -15,4 +15,8 @@ internal class CommandNames
     internal const string Destroy = "des";
 
     internal const string Combat = "combat";
+
+    internal const string Run = "run";
+
+    internal const string Attack = "attack";
 }

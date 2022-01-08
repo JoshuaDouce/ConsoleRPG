@@ -1,13 +1,8 @@
 ﻿namespace ConsoleRPG.Core.Models;
 
-public class Monster
+public class Monster : Character
 {
-    public string Name { get; set; }
-
-    public int Health { get; set; }
-
-    public Monster(string name)
+    public Monster(string name) : base(name)
     {
-        Name = name;
     }
 }

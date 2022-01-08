@@ -7,12 +7,16 @@ namespace ConsoleRPG.UI.Commands.Combat;
 
 internal class CombatCommand : Command
 {
-    public CombatCommand(ITextWriter textWriter, IServiceProvider serviceProvider) 
+    public CombatCommand(ITextWriter textWriter, IServiceProvider serviceProvider, 
+        RunCommand runCommand, AttackCommand attackCommand) 
         : base(CommandNames.Combat, "Actions you can perform when in Combat")
     {
-        var gameSession = serviceProvider.GetService<GameSession>();
+        AddCommand(runCommand);
+        AddCommand(attackCommand);
 
         this.SetHandler(() => {
+            var gameSession = serviceProvider.GetService<GameSession>();
+
             if (!gameSession!.InCombat)
             {
                 textWriter.WriteLine("You are not in combat!");

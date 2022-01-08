@@ -29,11 +29,15 @@ internal class MoveCommand : Command
                 textWriter?.WriteLine($"{gameSession?.CurrentLocation.Name} " +
                     $"has no connected location called {location}.");
             }
-
-            var monster = gameSession!.CurrentLocation.Monster;
-            if (monster is not null)
+            catch (Exception e)
             {
-                textWriter?.WriteLine($"You have encountered a {monster.Name}");
+                textWriter.WriteLine(e.Message);
+            }
+
+            if (gameSession!.InCombat)
+            {
+                var monster = gameSession!.CurrentLocation.Monster;
+                textWriter?.WriteLine($"You have encountered a {monster?.Name}");
                 textWriter?.WriteLine($"You are in combat!");
             }
 
