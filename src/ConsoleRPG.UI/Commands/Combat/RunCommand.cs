@@ -20,6 +20,7 @@ internal class RunCommand : Command
                 return;
             }
 
+            //TODO: the logic of 'run' should live in the core layer not the UI.
             //This could be % based result based on player vs enemy stats.
             //But this logic should not live here!
             gameSession!.InCombat = false;

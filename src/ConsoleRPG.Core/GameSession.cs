@@ -13,6 +13,10 @@ public class GameSession
 
     public bool InCombat = false;
 
+    //TODO: Continuing like this the game session will grow & grow. Need to leverage DI and extract some of
+    //the logic into seperate services that can then be called from the UI layer rather than the UI having logic
+    //spend some time reworkind the backend structure to make the front end calls easier. This will also allow
+    //the front end to be swapped out easier
     public GameSession()
     {
         CurrentLocation = WorldFactory.CreateWorld();

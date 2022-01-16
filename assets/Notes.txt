@@ -21,3 +21,23 @@ root --start ("start the game") - default true
 root --quit ("exit the game") - default false
 character --name <name> ("set character name")
 character --class <class> ("set character class")
+character info
+goto <location>
+combat attack
+combat run
+inventory use <item> (in and out of combat)
+inventory delete item
+
+MVP
+---
+Start a new game
+Create a chracter
+Move to a location
+Fight a monster -> win get reward - die game over.
+--- Additonal feature
+Inventory & Items
+Shop
+
+
+
+

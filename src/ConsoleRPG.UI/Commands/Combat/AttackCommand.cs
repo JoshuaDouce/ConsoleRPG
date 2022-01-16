@@ -18,6 +18,7 @@ internal class AttackCommand : Command
                 textWriter.WriteLine("You are not in combat!");
             }
 
+            //TODO: The logic for this should live in the core and not in the UI layer
             var currentPlayer = gameSession.CurrentPlayer;
             var currentMonster = gameSession!.CurrentLocation!.Monster;
             var playerAttack = currentPlayer.Attack - currentMonster!.Defense;
